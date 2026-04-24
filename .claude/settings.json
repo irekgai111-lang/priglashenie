@@ -1,0 +1,23 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "-",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '\necho \"🔄 Автосохранение всех проектов перед выключением...\"\nPROJECT_DIR=\"/c/Users/Dell/Documents/project\"\n\nfor project in \"$PROJECT_DIR\"/*; do\n  if [ -d \"$project/.git\" ]; then\n    project_name=$(basename \"$project\")\n    echo \"📦 Сохраняю $project_name...\"\n    \n    cd \"$project\" 2>/dev/null || continue\n    \n    # Добавляем все изменения\n    git add . 2>/dev/null\n    \n    # Проверяем есть ли что коммитить\n    if ! git diff --cached --quiet 2>/dev/null; then\n      git commit -m \"Auto-save before session end\n\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\" 2>/dev/null && echo \"  ✅ Закоммичено\"\n    else\n      echo \"  ✓ Нет изменений\"\n    fi\n    \n    # Пушим если есть remote\n    if git remote -v 2>/dev/null | grep -q origin; then\n      git push 2>/dev/null && echo \"  ✅ Запушено в GitHub\" || echo \"  ⚠️ Ошибка push\"\n    fi\n  fi\ndone\n\necho \"\\n✅ Все проекты сохранены на GitHub\"\necho \"📝 Помните: важные файлы (.git, CLAUDE.md, PLAN.md, .md файлы) защищены от удаления!\"\n'",
+            "timeout": 120,
+            "statusMessage": "Сохраняю проекты на GitHub..."
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Read"
+    ]
+  }
+}
