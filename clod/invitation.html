@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Двухстороннее приглашение A5 Landscape</title>
+
+  <style>
+    @page {
+      size: A5 landscape;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e8e8e8;
+      font-family: "Times New Roman", Georgia, serif;
+      color: #ffffff;
+    }
+
+    .sheet {
+      width: 210mm;
+      height: 148mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      margin: 0 auto;
+      background: #063f34;
+    }
+
+    @media screen {
+      .sheet {
+        margin: 12mm auto;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+      }
+
+      .sheet {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+
+    .emerald-gold {
+      --bg: #063f34;
+      --bg2: #082f29;
+      --accent: #d8b45a;
+      --accent-soft: rgba(216, 180, 90, 0.26);
+      --text: #fff9e8;
+      --muted: #f4e9c8;
+    }
+
+    .emerald-silver {
+      --bg: #063f34;
+      --bg2: #092f2a;
+      --accent: #d8dde0;
+      --accent-soft: rgba(216, 221, 224, 0.28);
+      --text: #f7fbfb;
+      --muted: #e5eeee;
+    }
+
+    .emerald-bordeaux {
+      --bg: #063f34;
+      --bg2: #092f2a;
+      --accent: #7b1f32;
+      --accent-soft: rgba(123, 31, 50, 0.32);
+      --text: #fff5f2;
+      --muted: #f2ded9;
+    }
+
+    .front,
+    .back {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.055), transparent 26%),
+        radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.045), transparent 28%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+    }
+
+    .front::before,
+    .back::before {
+      content: "";
+      position: absolute;
+      inset: 8mm;
+      border: 0.45mm solid var(--accent);
+      opacity: 0.88;
+      pointer-events: none;
+    }
+
+    .front::after,
+    .back::after {
+      content: "";
+      position: absolute;
+      inset: 12mm;
+      border: 0.18mm solid var(--accent-soft);
+      pointer-events: none;
+    }
+
+    .corner {
+      position: absolute;
+      width: 28mm;
+      height: 28mm;
+      border-color: var(--accent);
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .corner.tl {
+      top: 15mm;
+      left: 15mm;
+      border-top: 0.35mm solid;
+      border-left: 0.35mm solid;
+    }
+
+    .corner.tr {
+      top: 15mm;
+      right: 15mm;
+      border-top: 0.35mm solid;
+      border-right: 0.35mm solid;
+    }
+
+    .corner.bl {
+      bottom: 15mm;
+      left: 15mm;
+      border-bottom: 0.35mm solid;
+      border-left: 0.35mm solid;
+    }
+
+    .corner.br {
+      bottom: 15mm;
+      right: 15mm;
+      border-bottom: 0.35mm solid;
+      border-right: 0.35mm solid;
+    }
+
+    .front-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 7mm;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .front-title .ru {
+      font-size: 17mm;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .front-title .tt {
+      font-size: 12mm;
+      line-height: 1;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .back-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 19mm 18mm 14mm;
+    }
+
+    .address {
+      width: max-content;
+      max-width: 174mm;
+      margin: 0 auto 12mm;
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: 7mm;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+    }
+
+    .address-labels {
+      display: grid;
+      grid-template-rows: auto auto;
+      row-gap: 2.2mm;
+      text-align: right;
+      font-size: 5.2mm;
+      line-height: 1.08;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .guest-name {
+      grid-row: 1 / 3;
+      align-self: center;
+      white-space: nowrap;
+      font-size: 7.2mm;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.015em;
+    }
+
+    .texts {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 13mm;
+      min-height: 82mm;
+      color: var(--text);
+    }
+
+    .texts::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 0.22mm;
+      background: var(--accent);
+      opacity: 0.82;
+      transform: translateX(-50%);
+    }
+
+    .column {
+      font-size: 4.75mm;
+      line-height: 1.36;
+      font-weight: 400;
+      text-align: left;
+      color: var(--text);
+    }
+
+    .column p {
+      margin: 0 0 5.2mm;
+    }
+
+    .column p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sign {
+      margin-top: 5.5mm;
+      font-weight: 600;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== ВАРИАНТ 1: ИЗУМРУД + ЗОЛОТО ==================== -->
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Радмир Ильдарович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметовых</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Марина Валерьевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметовых</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Эльвира Юлдашевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Ришат Фаргатович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Александра Михайловна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-gold">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Григорий Леонидович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== ВАРИАНТ 2: ИЗУМРУД + СЕРЕБРО ==================== -->
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Радмир Ильдарович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Марина Валерьевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Эльвира Юлдашевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Ришат Фаргатович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Александра Михайловна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-silver">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Григорий Леонидович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== ВАРИАНТ 3: ИЗУМРУД + БОРДО ==================== -->
+
+  <section class="sheet front emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Радмир Ильдарович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Марина Валерьевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Эльвира Юлдашевна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Ришат Фаргатович</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet front emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="front-title">
+      <div class="ru">ПРИГЛАШЕНИЕ</div>
+      <div class="tt">ЧАКЫРУ</div>
+    </div>
+  </section>
+
+  <section class="sheet back emerald-bordeaux">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="back-content">
+      <div class="address">
+        <div class="address-labels">
+          <div>Уважаемый</div>
+          <div>Хөрмәтле</div>
+        </div>
+        <div class="guest-name">Александра Михайловна</div>
+      </div>
+
+      <div class="texts">
+        <div class="column">
+          <p>30 апреля 1971 года в Нижнекамске была создана семья первостроителей Флёра и Разины Гайнемхаметовых.</p>
+          <p>С честью приглашаем Вас разделить с нами торжество, посвящённое 55-летию совместной жизни.</p>
+          <p>Торжество пройдет 30 апреля 2026 года в 14:00 в городском отделении ЗАГС.</p>
+          <p class="sign">С уважением,<br>семья Гайнемхаметов</p>
+        </div>
+
+        <div class="column">
+          <p>1971 елның 30 апрелендә Түбән Кама шәһәрендә беренче төзүчеләр Флёр һәм Разинә Гайнемхаметовларның гаиләсе корылган иде.</p>
+          <p>Без Сезне 55 еллык уртак тормыш юбилеена багышланган тантананы бергәләп уртаклашырга чакырабыз.</p>
+          <p>Тантана 2026 елның 30 апрелендә 14:00 сәгатьтә шәһәр ЗАГС бүлегендә узачак.</p>
+          <p class="sign">Ихтирам белән,<br>Гайнемхаметовлар гаиләсе</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
