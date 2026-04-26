@@ -17,3 +17,4 @@ To eliminate this warning, add "type": "module" to C:\Users\Dell\Documents\proje
  ✓ Ready in 18.2s
  ○ Compiling / ...
  ✓ Compiled / in 8.9s (479 modules)
+ GET / 200 in 9506ms
