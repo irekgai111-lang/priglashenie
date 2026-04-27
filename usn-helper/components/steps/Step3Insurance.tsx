@@ -1,4 +1,5 @@
 import { FormData } from '@/lib/types';
+import { FIXED_CONTRIBUTION_INFO } from '@/lib/calculations';
 
 interface Props {
   data: FormData;
@@ -14,36 +15,26 @@ export default function Step3Insurance({ data, onChange }: Props) {
 
       <div className="space-y-6">
         <div className="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg mb-6">
-          <h3 className="font-bold text-gray-800 mb-2">📍 Фиксированные взносы ИП без сотрудников:</h3>
-          <p className="text-sm text-gray-700 mb-4">
-            На 2025 год размер фиксированного взноса ИП за себя составляет <strong>29 354 рублей</strong>
-            (в т.ч. в ПФР - 25 202 ₽, в ФОМС - 4 152 ₽)
-          </p>
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Размер фиксированного взноса (₽)
-          </label>
-          <div className="relative">
-            <input
-              type="number"
-              value={data.insuranceContributions.fixed}
-              onChange={(e) =>
-                onChange({
-                  insuranceContributions: {
-                    ...data.insuranceContributions,
-                    fixed: parseFloat(e.target.value) || 0,
-                  },
-                })
-              }
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"
-              min="0"
-            />
-            <span className="absolute right-4 top-3 text-gray-500">₽</span>
+          <h3 className="font-bold text-gray-800 mb-3">📍 Фиксированные взносы ИП на 2025 год (по ФНС):</h3>
+          <div className="bg-white p-4 rounded border-2 border-green-300 mb-3">
+            <p className="text-sm text-gray-600 mb-2">Разбор по фондам:</p>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="font-semibold">ПФР (пенсионный фонд):</span>
+                <span className="font-bold text-green-600">44 172 ₽</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-semibold">ФОМС (медицинский фонд):</span>
+                <span className="font-bold text-green-600">9 486 ₽</span>
+              </div>
+              <div className="flex justify-between border-t pt-2 font-bold text-lg">
+                <span>ИТОГО:</span>
+                <span className="text-green-600">{FIXED_CONTRIBUTION_INFO.total.toLocaleString('ru-RU')} ₽</span>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
-            По умолчанию установлено 29 354 ₽ (стандартный размер на 2025)
+          <p className="text-sm text-gray-700">
+            Источник: Федеральная налоговая служба (ФНС России)
           </p>
         </div>
 
@@ -55,6 +46,14 @@ export default function Step3Insurance({ data, onChange }: Props) {
           </p>
         </div>
 
+        <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+          <p className="text-sm font-semibold text-gray-700 mb-2">📋 Сроки уплаты взносов в 2025 году:</p>
+          <ul className="text-sm text-gray-700 space-y-1">
+            <li>✓ <strong>Фиксированные взносы</strong>: до <strong>28 декабря 2025</strong></li>
+            <li>✓ <strong>Взнос 1% от дохода</strong> (если есть): до <strong>01 апреля 2026</strong></li>
+          </ul>
+        </div>
+
         <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
           <p className="text-sm font-semibold text-gray-700 mb-2">⚠️ Подводные камни:</p>
           <ul className="text-sm text-gray-700 space-y-1">
@@ -62,15 +61,7 @@ export default function Step3Insurance({ data, onChange }: Props) {
             <li>✓ 1% от дохода свыше 300k - обязательный платеж</li>
             <li>✓ Можно вычесть 100% взносов без сотрудников</li>
             <li>⚠️ С сотрудниками - максимум 50% от налога</li>
-            <li>✓ Взносы платят в течение года, не только в декларации</li>
-          </ul>
-        </div>
-
-        <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
-          <p className="text-sm font-semibold text-gray-700 mb-2">📋 Сроки уплаты взносов в 2025 году:</p>
-          <ul className="text-sm text-gray-700 space-y-1">
-            <li>• Фиксированные взносы: до 31 декабря 2025</li>
-            <li>• Взнос 1% от дохода свыше 300k: до 01 апреля 2026</li>
+            <li>📌 СРОК ИЗМЕНЕН: вместо 31.12 теперь 28.12.2025</li>
           </ul>
         </div>
       </div>

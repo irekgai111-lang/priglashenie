@@ -2,19 +2,17 @@
 > usn-declaration-helper@1.0.0 dev
 > next dev
 
-(node:712) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Dell/Documents/project/priglashenie/usn-helper/next.config.js is not specified and it doesn't parse as CommonJS.
+(node:11640) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Dell/Documents/project/priglashenie/usn-helper/next.config.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to C:\Users\Dell\Documents\project\priglashenie\usn-helper\package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
+ ⚠ Port 3000 is in use, trying 3001 instead.
   ▲ Next.js 14.2.35
-  - Local:        http://localhost:3000
+  - Local:        http://localhost:3001
 
  ✓ Starting...
-(node:7944) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Dell/Documents/project/priglashenie/usn-helper/next.config.js is not specified and it doesn't parse as CommonJS.
+(node:11664) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Dell/Documents/project/priglashenie/usn-helper/next.config.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to C:\Users\Dell\Documents\project\priglashenie\usn-helper\package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
- ✓ Ready in 18.2s
- ○ Compiling / ...
- ✓ Compiled / in 8.9s (479 modules)
- GET / 200 in 9506ms
+ ✓ Ready in 17.2s

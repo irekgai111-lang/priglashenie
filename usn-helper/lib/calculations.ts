@@ -2,6 +2,8 @@ import { FormData, TaxCalculation } from './types';
 
 const TAX_RATE = 0.06;
 const MAX_TAX_REDUCTION_WITH_EMPLOYEES = 0.5;
+// Фиксированные взносы за 2025 год (по данным ФНС)
+const FIXED_CONTRIBUTION_2025 = 53658; // ПФР: 44 172 + ФОМС: 9 486
 
 export function calculateTax(data: FormData): TaxCalculation {
   const q1 = data.quarterlyIncome.q1;
@@ -20,7 +22,7 @@ export function calculateTax(data: FormData): TaxCalculation {
   const totalTax = q1Tax + q2Tax + q3Tax + q4Tax;
   
   // Страховые взносы
-  const fixedContributions = data.insuranceContributions.fixed;
+  const fixedContributions = FIXED_CONTRIBUTION_2025;
   let percentageContributions = 0;
   
   // 1% от дохода свыше 300k рублей
@@ -69,3 +71,11 @@ export function formatMoney(amount: number): string {
 export function formatRubles(amount: number): string {
   return `${formatMoney(amount)} ₽`;
 }
+
+export const FIXED_CONTRIBUTION_INFO = {
+  year: 2025,
+  total: FIXED_CONTRIBUTION_2025,
+  pfr: 44172,
+  foms: 9486,
+  deadline: '28 декабря 2025',
+};
