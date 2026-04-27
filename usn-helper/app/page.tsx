@@ -7,12 +7,13 @@ import StepIndicator from '@/components/StepIndicator';
 import Step1BasicInfo from '@/components/steps/Step1BasicInfo';
 import Step2QuarterlyIncome from '@/components/steps/Step2QuarterlyIncome';
 import Step3Insurance from '@/components/steps/Step3Insurance';
-import Step4Documents from '@/components/steps/Step4Documents';
-import Step5Declaration from '@/components/steps/Step5Declaration';
-import Step6Instructions from '@/components/steps/Step6Instructions';
-import Step7Export from '@/components/steps/Step7Export';
+import Step4Deductions from '@/components/steps/Step4Deductions';
+import Step5Documents from '@/components/steps/Step5Documents';
+import Step6Declaration from '@/components/steps/Step6Declaration';
+import Step7Instructions from '@/components/steps/Step7Instructions';
+import Step8Export from '@/components/steps/Step8Export';
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 8;
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -22,7 +23,8 @@ export default function Home() {
     firstName: '',
     hasEmployees: false,
     quarterlyIncome: { q1: 0, q2: 0, q3: 0, q4: 0 },
-    insuranceContributions: { fixed: 29354, percentageAmount: 0 },
+    insuranceContributions: { fixed: 53658, percentageAmount: 0 },
+    deductions: { education: 0, sickLeavePayments: 0, rd: 0, charity: 0 },
   });
 
   const [taxCalculation, setTaxCalculation] = useState<TaxCalculation | null>(null);
@@ -83,21 +85,27 @@ export default function Home() {
             />
           )}
           {currentStep === 4 && (
-            <Step4Documents
+            <Step4Deductions
+              data={formData}
+              onChange={handleFormDataChange}
+            />
+          )}
+          {currentStep === 5 && (
+            <Step5Documents
               hasEmployees={formData.hasEmployees}
             />
           )}
-          {currentStep === 5 && taxCalculation && (
-            <Step5Declaration
+          {currentStep === 6 && taxCalculation && (
+            <Step6Declaration
               formData={formData}
               calculation={taxCalculation}
             />
           )}
-          {currentStep === 6 && (
-            <Step6Instructions />
-          )}
           {currentStep === 7 && (
-            <Step7Export
+            <Step7Instructions />
+          )}
+          {currentStep === 8 && (
+            <Step8Export
               formData={formData}
               calculation={taxCalculation}
             />

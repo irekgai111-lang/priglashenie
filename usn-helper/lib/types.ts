@@ -17,6 +17,13 @@ export interface InsuranceContributions {
   percentageAmount: number;
 }
 
+export interface Deductions {
+  education: number; // Вычет за обучение работников
+  sickLeavePayments: number; // Больничные выплаты сотрудникам (первые 3 дня)
+  rd: number; // Научные исследования и разработки
+  charity: number; // Благотворительность
+}
+
 export interface TaxCalculation {
   totalIncome: number;
   q1Income: number;
@@ -31,6 +38,7 @@ export interface TaxCalculation {
   fixedContributions: number;
   percentageContributions: number;
   totalContributions: number;
+  totalDeductions: number; // Сумма всех вычетов
   maxTaxReduction: number;
   actualTaxReduction: number;
   finalTax: number;
@@ -39,4 +47,5 @@ export interface TaxCalculation {
 export interface FormData extends IPData {
   quarterlyIncome: QuarterlyIncome;
   insuranceContributions: InsuranceContributions;
+  deductions: Deductions;
 }
