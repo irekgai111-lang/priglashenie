@@ -177,7 +177,7 @@ ${calculation.totalDeductions > 0 ? `Вычеты:              -${formatRubles(
           <ul className="text-sm text-gray-700 space-y-1">
             <li>📅 <strong>Подача декларации:</strong> до 27 апреля 2026</li>
             <li>💳 <strong>Фиксированные взносы:</strong> до 28 декабря 2025</li>
-            <li>💳 <strong>Дополнительный 1% взнос:</strong> до 01 апреля 2026 (если доход > 300k)</li>
+            <li>💳 <strong>Дополнительный 1% взнос:</strong> до 01 апреля 2026 (если доход {`>`} 300k)</li>
             <li>💳 <strong>Налог к уплате:</strong> до 27 апреля 2026</li>
           </ul>
         </div>

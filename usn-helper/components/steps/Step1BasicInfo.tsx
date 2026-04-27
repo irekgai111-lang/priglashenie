@@ -23,7 +23,7 @@ export default function Step1BasicInfo({ data, onChange }: Props) {
             onChange={(e) => onChange({ inn: e.target.value })}
             placeholder="12345678901"
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"
-            maxLength="12"
+            maxLength={12}
           />
           <p className="text-xs text-gray-500 mt-1">Состоит из 12 цифр</p>
         </div>
