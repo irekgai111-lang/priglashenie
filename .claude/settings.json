@@ -17,7 +17,10 @@
   "permissions": {
     "allow": [
       "Bash(git *)",
-      "Read"
+      "Bash(rm *)",
+      "Bash(npm *)",
+      "Read",
+      "Edit"
     ]
   }
 }
